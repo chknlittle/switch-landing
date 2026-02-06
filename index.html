@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Switch — Multi-Contact AI for Developers</title>
+  <meta name="description" content="Chat with AI coding assistants from any chat client. Each session is a separate contact. Open source, self-hosted, no vendor lock-in.">
+  <meta property="og:title" content="Switch — Multi-Contact AI for Developers">
+  <meta property="og:description" content="Chat with AI coding assistants from any chat client. Each session is a separate contact. Open source and self-hosted.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://switchagent.ai/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Switch — Multi-Contact AI for Developers">
+  <meta name="twitter:description" content="Chat with AI coding assistants from any chat client. Each session is a separate contact. Open source and self-hosted.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -260,6 +268,7 @@
       top: 0;
       right: 0;
       opacity: 0.6;
+      animation: geo-drift-1 20s ease-in-out infinite;
     }
 
     .geo-triangle {
@@ -272,6 +281,7 @@
       opacity: 0.3;
       bottom: 50px;
       left: 50px;
+      animation: geo-drift-2 25s ease-in-out infinite;
     }
 
     .geo-square {
@@ -283,6 +293,22 @@
       bottom: 100px;
       right: 100px;
       transform: rotate(15deg);
+      animation: geo-drift-3 22s ease-in-out infinite;
+    }
+
+    @keyframes geo-drift-1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-12px, 10px); }
+    }
+
+    @keyframes geo-drift-2 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(8px, -10px) rotate(5deg); }
+    }
+
+    @keyframes geo-drift-3 {
+      0%, 100% { transform: rotate(15deg) translate(0, 0); }
+      50% { transform: rotate(20deg) translate(-8px, 6px); }
     }
 
     /* Demo Section */
@@ -923,6 +949,41 @@
       font-size: 0.875rem;
     }
 
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.08s; }
+    .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.16s; }
+    .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.24s; }
+    .reveal-stagger > .reveal:nth-child(5) { transition-delay: 0.32s; }
+    .reveal-stagger > .reveal:nth-child(6) { transition-delay: 0.4s; }
+
+    /* Demo typing cursor */
+    .demo-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
     /* Mobile */
     @media (max-width: 1024px) {
       .features-grid {
@@ -1037,7 +1098,7 @@
           <span>AI For Developers</span>
         </h1>
         <p>
-          Chat with AI coding assistants from any chat client. Each session is a separate contact. No vendor lock-in. Use whatever chat server you want.
+          Chat with AI coding assistants from any chat client. Each session is a separate contact — no vendor lock-in, no special apps required.
         </p>
         <div class="hero-cta">
           <a href="https://github.com/chknlittle/switch" class="btn btn-primary btn-large" target="_blank">
@@ -1053,7 +1114,7 @@
 
   <section class="demo">
     <div class="container">
-      <div class="demo-frame">
+      <div class="demo-frame reveal">
         <div class="demo-header">
           <div class="demo-dots">
             <div class="demo-dot red"></div>
@@ -1135,33 +1196,33 @@
         <h2>One Contact Per Session</h2>
         <p>Traditional AI chat systems hide sessions behind a single bot. Switch makes every session a first-class contact in your chat app.</p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
+      <div class="features-grid reveal-stagger">
+        <div class="feature-card reveal">
           <div class="feature-number">01</div>
           <h3>Parallel Conversations</h3>
           <p>Three sessions means three chat windows, not one window with context-switching commands. Your chat app's UI manages your agent swarm natively.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-number">02</div>
           <h3>Truly Portable</h3>
           <p>Open a session on your phone, continue on desktop. Each contact syncs independently through your XMPP client. History follows you everywhere.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-number">03</div>
           <h3>No Vendor Lock-in</h3>
           <p>Use any chat client you want. Conversations, Monal, Gajim, Dino — or our custom macOS client. It's your choice.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-number">04</div>
           <h3>Multiple AI Backends</h3>
           <p>Claude Code, OpenCode with GPT, GLM, or Kimi. Different models for different tasks, all accessible from the same interface.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-number">05</div>
           <h3>Rich Metadata</h3>
           <p>Tool calls, run stats, attachments — all rendered beautifully. See token counts, costs, and duration at a glance.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-number">06</div>
           <h3>Self-Hosted</h3>
           <p>Runs on your own Linux machine. Your code stays local. Your data stays yours. Full system access for real development work.</p>
@@ -1180,23 +1241,23 @@
         <h2>Four Steps to AI</h2>
         <p>Switch bridges your chat client to AI coding assistants. Here's the flow.</p>
       </div>
-      <div class="steps">
-        <div class="step">
+      <div class="steps reveal-stagger">
+        <div class="step reveal">
           <div class="step-number">01</div>
           <h3>Message Orchestrator</h3>
           <p>Send a message to cc@, oc@, or oc-gpt@ to start a new session. Each orchestrator maps to a different AI backend.</p>
         </div>
-        <div class="step">
+        <div class="step reveal">
           <div class="step-number">02</div>
           <h3>Get Session Contact</h3>
           <p>Switch creates a dedicated contact for your session. This is your 1:1 chat with that task.</p>
         </div>
-        <div class="step">
+        <div class="step reveal">
           <div class="step-number">03</div>
           <h3>Chat Naturally</h3>
           <p>Send code, ask questions, run shell commands with ! prefix. The AI sees your project files and can make edits directly.</p>
         </div>
-        <div class="step">
+        <div class="step reveal">
           <div class="step-number">04</div>
           <h3>Spawn More Sessions</h3>
           <p>When a session is busy, spawn a sibling with +message. Run multiple tasks in parallel without waiting.</p>
@@ -1215,8 +1276,8 @@
         <h2>Choose Your Weapon</h2>
         <p>Switch works with any chat client. Here are some recommendations.</p>
       </div>
-      <div class="clients-grid">
-        <div class="client-card featured">
+      <div class="clients-grid reveal-stagger">
+        <div class="client-card featured reveal">
           <div class="client-header">
             <div>
               <h3>switch-mac-os</h3>
@@ -1238,7 +1299,7 @@
             </a>
           </div>
         </div>
-        <div class="client-card">
+        <div class="client-card reveal">
           <div class="client-header">
             <div>
               <h3>Conversations</h3>
@@ -1257,7 +1318,7 @@
             <a href="https://conversations.im/" class="btn btn-secondary" target="_blank">Website →</a>
           </div>
         </div>
-        <div class="client-card">
+        <div class="client-card reveal">
           <div class="client-header">
             <div>
               <h3>Monal</h3>
@@ -1276,7 +1337,7 @@
             <a href="https://monal-im.org/" class="btn btn-secondary" target="_blank">Website →</a>
           </div>
         </div>
-        <div class="client-card">
+        <div class="client-card reveal">
           <div class="client-header">
             <div>
               <h3>Gajim</h3>
@@ -1309,7 +1370,7 @@
         <h2>Get Running in Minutes</h2>
         <p>Install Switch on your own hardware and start chatting with AI.</p>
       </div>
-      <div class="code-block">
+      <div class="code-block reveal">
         <div class="code-header">
           <div class="code-tabs">
             <button class="code-tab active">Install</button>
@@ -1342,7 +1403,7 @@ uv run python -m src.bridge</pre>
   <section class="cta">
     <div class="cta-grid"></div>
     <div class="container">
-      <div class="cta-content">
+      <div class="cta-content reveal">
         <h2>Ready to <span>Switch?</span></h2>
         <p>Join developers who are already using Switch to manage their AI workflows. Self-hosted, open source, and designed for real work.</p>
         <div class="hero-cta">
@@ -1375,15 +1436,40 @@ uv run python -m src.bridge</pre>
   </footer>
 
   <script>
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Code tabs with real content
+    const tabContent = {
+      'Install': `<span class="comment"># Clone the repository</span>\ngit clone https://github.com/chknlittle/switch.git\ncd switch\n\n<span class="comment"># Install dependencies</span>\nuv sync\n\n<span class="comment"># Set up agent instructions</span>\nln -sf ~/switch/AGENTS.md ~/CLAUDE.md\nln -sf ~/switch/AGENTS.md ~/AGENTS.md`,
+      'Configure': `<span class="comment"># Copy example config</span>\ncp .env.example .env\n\n<span class="comment"># Edit with your XMPP server details</span>\n<span class="keyword">XMPP_SERVER</span>=<span class="string">"your-server.com"</span>\n<span class="keyword">XMPP_DOMAIN</span>=<span class="string">"your-server.com"</span>\n<span class="keyword">BOT_PASSWORD</span>=<span class="string">"your-bot-password"</span>\n<span class="keyword">USER_JID</span>=<span class="string">"you@your-server.com"</span>`,
+      'Run': `<span class="comment"># Start the bridge</span>\nuv run python -m src.bridge\n\n<span class="comment"># Or run as a systemd service</span>\nsystemctl --user enable switch\nsystemctl --user start switch\n\n<span class="comment"># Check logs</span>\njournalctl --user -u switch -f`
+    };
+
     document.querySelectorAll('.code-tabs').forEach(tabs => {
+      const codeBlock = tabs.closest('.code-block');
+      const pre = codeBlock.querySelector('pre');
+
       tabs.querySelectorAll('.code-tab').forEach(tab => {
         tab.addEventListener('click', () => {
           tabs.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
+          const content = tabContent[tab.textContent.trim()];
+          if (content) pre.innerHTML = content;
         });
       });
     });
 
+    // Copy button
     document.querySelectorAll('.code-copy').forEach(btn => {
       btn.addEventListener('click', () => {
         const code = btn.closest('.code-block').querySelector('pre').textContent;
@@ -1392,6 +1478,33 @@ uv run python -m src.bridge</pre>
         setTimeout(() => btn.textContent = 'Copy', 2000);
       });
     });
+
+    // Demo typing animation
+    (function initDemo() {
+      const chat = document.querySelector('.demo-chat');
+      if (!chat) return;
+
+      const messages = Array.from(chat.children);
+      messages.forEach(m => m.style.opacity = '0');
+
+      let i = 0;
+      const demoObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          demoObserver.disconnect();
+          showNext();
+        }
+      }, { threshold: 0.3 });
+      demoObserver.observe(chat);
+
+      function showNext() {
+        if (i >= messages.length) return;
+        const msg = messages[i];
+        msg.style.transition = 'opacity 0.4s ease';
+        msg.style.opacity = '1';
+        i++;
+        setTimeout(showNext, 600);
+      }
+    })();
   </script>
 </body>
 </html>
